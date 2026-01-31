@@ -25,7 +25,7 @@ const TopNav = ({ title = "Dashboard" }) => {
 
                 {/* User profile */}
                 <div className="flex items-center gap-3 pl-4 border-l border-white/10">
-                    <div className="text-right">
+                    <div className="text-right hidden md:block">
                         <p className="text-sm font-medium text-white">{user?.name || 'User'}</p>
                         <p className="text-xs text-gray-500">@{user?.email?.split('@')[0]}</p>
                     </div>

@@ -82,7 +82,7 @@ const LandingPage = () => {
                         </span>
                     </div>
 
-                    <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
+                    <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight">
                         Expense Management
                         <br />
                         <span className="bg-gradient-to-r from-neon-lime via-neon-orange to-neon-pink bg-clip-text text-transparent">

@@ -432,16 +432,16 @@ const AddExpense = () => {
                                 <label className="block text-sm font-medium text-gray-300 mb-3">
                                     Expense Type
                                 </label>
-                                <div className="grid grid-cols-3 gap-4">
+                                <div className="grid grid-cols-3 gap-2 md:gap-4">
                                     <button
                                         type="button"
                                         onClick={() => setFormData({ ...formData, type: 'personal', groupId: '', friendName: '', friendEmail: '' })}
-                                        className={`p-4 rounded-2xl font-medium transition-all ${formData.type === 'personal'
+                                        className={`p-2 md:p-4 rounded-2xl font-medium transition-all text-sm md:text-base ${formData.type === 'personal'
                                             ? 'bg-neon-lime text-black shadow-neon-lime'
                                             : 'bg-dark-850 text-gray-400 border border-white/10'
                                             }`}
                                     >
-                                        <Tag className="mx-auto mb-2" size={24} />
+                                        <Tag className="mx-auto mb-2 w-5 h-5 md:w-6 md:h-6" />
                                         Personal
                                     </button>
                                     <button
@@ -452,18 +452,18 @@ const AddExpense = () => {
                                             : 'bg-dark-850 text-gray-400 border border-white/10'
                                             }`}
                                     >
-                                        <User className="mx-auto mb-2" size={24} />
+                                        <User className="mx-auto mb-2 w-5 h-5 md:w-6 md:h-6" />
                                         Friend
                                     </button>
                                     <button
                                         type="button"
                                         onClick={() => setFormData({ ...formData, type: 'group', friendName: '', friendEmail: '' })}
-                                        className={`p-4 rounded-2xl font-medium transition-all ${formData.type === 'group'
+                                        className={`p-2 md:p-4 rounded-2xl font-medium transition-all text-sm md:text-base ${formData.type === 'group'
                                             ? 'bg-neon-orange text-black shadow-neon-orange'
                                             : 'bg-dark-850 text-gray-400 border border-white/10'
                                             }`}
                                     >
-                                        <Users className="mx-auto mb-2" size={24} />
+                                        <Users className="mx-auto mb-2 w-5 h-5 md:w-6 md:h-6" />
                                         Group
                                     </button>
                                 </div>
