@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Premium dark theme */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #121212;
+  --bg-card: #1a1a1a;
+  --bg-card-hover: #1f1f1f;
+
+  /* Neon accents */
+  --neon-lime: #a3e635;
+  --neon-orange: #fb923c;
+  --neon-pink: #ec4899;
+  --neon-blue: #3b82f6;
+
+  /* Text colors */
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Premium card styles */
+.premium-card {
+  background: var(--bg-card);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.premium-card:hover {
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+}
+
+/* Glassmorphism utilities */
+.glass {
+  background: rgba(26, 26, 26, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-strong {
+  background: rgba(26, 26, 26, 0.9);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Neon gradient backgrounds */
+.gradient-lime {
+  background: linear-gradient(135deg, var(--neon-lime) 0%, #84cc16 100%);
+}
+
+.gradient-orange {
+  background: linear-gradient(135deg, var(--neon-orange) 0%, #f97316 100%);
+}
+
+/* Pill-shaped elements (like reference timeline) */
+.pill {
+  border-radius: 9999px;
+  padding: 0.5rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3a3a3a;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-lime);
+}
+
+/* Smooth transitions */
+/* Smooth transitions for interactive elements only */
+button,
+a,
+input,
+.card,
+.premium-card,
+.icon-btn {
+  transition: all 0.3s ease;
+}
+
+/* Circular icon buttons (like sidebar in reference) */
+.icon-btn {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.icon-btn:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--neon-lime);
+  box-shadow: 0 0 15px rgba(163, 230, 53, 0.2);
+}
+
+.icon-btn.active {
+  box-shadow: 0 0 20px rgba(163, 230, 53, 0.4);
+}
+
+/* Custom Neon Shadows */
+.shadow-neon-lime {
+  box-shadow: 0 0 20px rgba(163, 230, 53, 0.4);
+}
+
+.shadow-neon-pink {
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
+}
+
+.shadow-neon-orange {
+  box-shadow: 0 0 20px rgba(251, 146, 60, 0.4);
+}
+
+.shadow-neon-purple {
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+}
