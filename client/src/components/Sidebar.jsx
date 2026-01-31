@@ -20,7 +20,7 @@ const Sidebar = () => {
         { icon: Wallet, path: '/budget', label: 'Budget' },
         { icon: Users, path: '/groups', label: 'Groups' },
         { icon: UserPlus, path: '/friends', label: 'Friends' },
-        { icon: Wallet, path: '/friends?tab=expenses', label: 'Friend Expenses' },
+
         { icon: BarChart3, path: '/analytics', label: 'Analytics' },
     ];
 

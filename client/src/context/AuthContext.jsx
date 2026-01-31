@@ -40,7 +40,17 @@ export const AuthProvider = ({ children }) => {
     const signup = async (name, email, password) => {
         try {
             const response = await authAPI.signup(name, email, password);
-            // Note: Signup no longer returns token, user must verify email first
+
+            // Auto-login if token is present (New behavior)
+            if (response.data.token) {
+                const { token: newToken, user: newUser } = response.data;
+                localStorage.setItem('token', newToken);
+                setToken(newToken);
+                setUser(newUser);
+                return { success: true, message: 'Account created! Logging in...' };
+            }
+
+            // Fallback for old behavior (should not happen now)
             return { success: true, message: response.data.message };
         } catch (error) {
             return {

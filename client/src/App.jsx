@@ -3,14 +3,14 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import LoadingSpinner from './components/ui/LoadingSpinner';
 
 // Pages
-import LandingPage from './pages/LandingPage';
+
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
 import Dashboard from './pages/Dashboard';
 import AddExpense from './pages/AddExpense';
 import BudgetTracker from './pages/BudgetTracker';
 import Analytics from './pages/Analytics';
-import GuiltySpending from './pages/GuiltySpending';
+
 import GroupManagement from './pages/GroupManagement';
 import Friends from './pages/Friends';
 import VerifyEmail from './pages/VerifyEmail';
@@ -54,7 +54,7 @@ function App() {
       <AuthProvider>
         <Routes>
           {/* Public Routes */}
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={<Navigate to="/login" replace />} />
           <Route
             path="/signup"
             element={
@@ -107,14 +107,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/guilty-spending"
-            element={
-              <ProtectedRoute>
-                <GuiltySpending />
-              </ProtectedRoute>
-            }
-          />
+
           <Route
             path="/groups"
             element={

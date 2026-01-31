@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, User, ArrowRight, AlertCircle } from 'lucide-react';
-import { authAPI } from '../services/api';
+import { authAPI } from '../services/api'; // Keep for consistency if needed, but context is better
+import { useAuth } from '../context/AuthContext';
 
 const SignupPage = () => {
     const navigate = useNavigate();
@@ -12,6 +13,8 @@ const SignupPage = () => {
     });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+
+    const { signup } = useAuth(); // Use context instead of direct API
 
     const handleChange = (e) => {
         setFormData({
@@ -25,17 +28,13 @@ const SignupPage = () => {
         setError('');
         setLoading(true);
 
-        try {
-            const res = await authAPI.signup(formData.name, formData.email, formData.password);
-            if (res.data.success) {
-                // Redirect to verification pending page
-                navigate('/verification-pending', { state: { email: formData.email } });
-            } else {
-                setError(res.data.message || 'Signup failed. Please try again.');
-            }
-        } catch (err) {
-            setError(err.response?.data?.message || 'Signup failed. Please try again.');
-        } finally {
+        const res = await signup(formData.name, formData.email, formData.password);
+
+        if (res.success) {
+            // Success! Auto-login handled by context, just redirect
+            navigate('/dashboard');
+        } else {
+            setError(res.message);
             setLoading(false);
         }
     };

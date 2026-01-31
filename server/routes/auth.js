@@ -50,33 +50,66 @@ router.post('/signup', [
             name,
             email,
             password,
-            isEmailVerified: false
+            isEmailVerified: true // Auto-verify
         });
 
-        // Generate verification token
-        const verificationToken = crypto.randomBytes(32).toString('hex');
+        // Generate verification token (OPTIONAL: Keep for future reference, or remove)
+        // Skipping email sending for now as per user request
 
-        // Save token to user (hash it for security)
-        user.emailVerificationToken = crypto
-            .createHash('sha256')
-            .update(verificationToken)
-            .digest('hex');
-        user.emailVerificationExpires = Date.now() + 24 * 60 * 60 * 1000; // 24 hours
+        /* 
+        const verificationToken = crypto.randomBytes(32).toString('hex');
+        user.emailVerificationToken = crypto.createHash('sha256').update(verificationToken).digest('hex');
+        user.emailVerificationExpires = Date.now() + 24 * 60 * 60 * 1000;
         await user.save();
+        */
+
+        // Create token for immediate login
+        const token = generateToken(user._id);
+
+        res.status(201).json({
+            success: true,
+            // message: 'Account created! Please check your email.',
+            message: 'Account created! Logging you in...',
+            token,
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                monthlyBudget: user.monthlyBudget
+            }
+        });
 
         // Send verification email
+        /*
         try {
             await sendVerificationEmail(user.email, user.name, verificationToken);
         } catch (emailError) {
             console.error('Failed to send verification email:', emailError);
-            // Don't fail signup if email fails, but log it
         }
+        */
 
+        // Already handled in the first chunk, but ensuring no double code
+        // The return was modified in the first chunk to include token.
+        // This block needs to be removed/merged if it conflicts.
+        // The previous tool call REPLACED lines 49-64 AND lines 75-79 effectively if I targeted correctly.
+        // Wait, I missed targeting the end of the response in previous call.
+        // Let's ensure this chunk is correct.
+
+        // Actually, the first chunk replaced lines 49-64.
+        // The response was at line 75. 
+        // I need to update the response part ONLY if I didn't include it in chunk 1.
+        // Checking chunk 1... I DID include the response in chunk 1.
+        // But the target content for chunk 1 ended at line 64. 
+        // So I need one more chunk for the response modification.
+
+        /* 
+        // Old response:
         res.status(201).json({
             success: true,
             message: 'Account created! Please check your email to verify your account.',
             email: user.email
         });
+        */
     } catch (error) {
         console.error('Signup error:', error);
         console.error('Error stack:', error.stack);
@@ -129,14 +162,16 @@ router.post('/login', [
         }
 
         // Check if email is verified
+        /*
         if (!user.isEmailVerified) {
             return res.status(403).json({
                 success: false,
-                message: 'Please verify your email before logging in. Check your inbox for the verification link.',
+                message: 'Please verify your email before logging in.',
                 emailNotVerified: true,
                 email: user.email
             });
         }
+        */
 
         // Generate token
         const token = generateToken(user._id);
