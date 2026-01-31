@@ -94,15 +94,7 @@ const Dashboard = () => {
     return (
         <div className="min-h-screen bg-dark-900 text-white relative overflow-hidden">
             <Sidebar />
-            <TopNav title={
-                <div className="flex items-center gap-2">
-                    Dashboard
-                    <span className="flex items-center gap-1 text-xs bg-green-500/10 text-green-400 px-2 py-1 rounded-full border border-green-500/20">
-                        <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shadow-[0_0_10px_rgba(74,222,128,0.5)]"></span>
-                        LIVE
-                    </span>
-                </div>
-            } />
+            <TopNav title="Dashboard" />
 
             <main className="md:ml-20 ml-0 pt-20 px-4 md:px-8 pb-24 md:pb-8 relative z-10 transition-all duration-300">
                 <div className="max-w-[1600px] mx-auto">
