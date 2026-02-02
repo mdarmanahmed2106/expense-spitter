@@ -90,7 +90,7 @@ const Transactions = () => {
             <Sidebar />
             <TopNav title="Transactions" />
 
-            <main className="md:ml-20 ml-0 pt-16 p-6 pb-24">
+            <main className="md:ml-20 ml-0 pt-16 p-4 md:p-6 pb-24 md:pb-8">
                 <div className="max-w-6xl mx-auto space-y-6">
 
                     {/* Header & Controls */}

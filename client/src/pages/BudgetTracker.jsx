@@ -68,7 +68,7 @@ const BudgetTracker = () => {
             <Sidebar />
             <TopNav title="Budget Tracker" />
 
-            <main className="md:ml-20 ml-0 pt-16 p-8 pb-24 md:pb-8">
+            <main className="md:ml-20 ml-0 pt-16 p-4 md:p-8 pb-24 md:pb-8">
                 <div className="max-w-4xl mx-auto">
                     {/* Main Budget Card */}
                     <div className="premium-card mb-8">

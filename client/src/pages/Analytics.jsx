@@ -41,7 +41,7 @@ const Analytics = () => {
             <Sidebar />
             <TopNav title="Analytics" />
 
-            <main className="md:ml-20 ml-0 pt-16 p-8 pb-24 md:pb-8">
+            <main className="md:ml-20 ml-0 pt-16 p-4 md:p-8 pb-24 md:pb-8">
                 <div className="max-w-[1600px] mx-auto">
                     {/* Header Stats */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">

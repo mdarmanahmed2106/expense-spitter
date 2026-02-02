@@ -299,7 +299,7 @@ const AddExpense = () => {
             <Sidebar />
             <TopNav title="Add Expense" />
 
-            <main className="md:ml-20 ml-0 pt-16 p-8 pb-20">
+            <main className="md:ml-20 ml-0 pt-16 p-4 md:p-8 pb-24 md:pb-8">
                 <div className="max-w-2xl mx-auto">
                     <div className="premium-card relative">
                         {/* Scan Overlay */}

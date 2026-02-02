@@ -176,7 +176,7 @@ const Friends = () => {
             <Sidebar />
             <TopNav title="Friends" />
 
-            <main className="ml-20 pt-16 p-8">
+            <main className="md:ml-20 ml-0 pt-16 p-4 md:p-8 pb-24 md:pb-8">
                 <div className="max-w-[1600px] mx-auto">
                     {/* Header */}
                     <div className="mb-8">
@@ -185,7 +185,7 @@ const Friends = () => {
                     </div>
 
                     {/* Tabs */}
-                    <div className="flex gap-4 mb-8">
+                    <div className="flex gap-4 mb-8 overflow-x-auto pb-2 scrollbar-hide">
                         <button
                             onClick={() => setActiveTab('friends')}
                             className={`px-6 py-3 rounded-2xl font-medium transition-all ${activeTab === 'friends'
