@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Users, Plus, DollarSign, Copy, Check, LogIn, X, TrendingUp, TrendingDown } from 'lucide-react';
+import { Users, Plus, IndianRupee, Copy, Check, LogIn, X, TrendingUp, TrendingDown } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import TopNav from '../components/TopNav';
 import Modal from '../components/ui/Modal';

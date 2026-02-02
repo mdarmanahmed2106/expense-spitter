@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { DollarSign, TrendingUp, AlertTriangle, CheckCircle, Edit2 } from 'lucide-react';
+import { IndianRupee, TrendingUp, AlertTriangle, CheckCircle, Edit2 } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import TopNav from '../components/TopNav';
 import PageLoader from '../components/PageLoader';
@@ -115,7 +115,7 @@ const BudgetTracker = () => {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                             <div className="p-6 bg-dark-850 rounded-2xl">
                                 <div className="flex items-center gap-3 mb-2">
-                                    <DollarSign className="text-neon-lime" size={24} />
+                                    <IndianRupee className="text-neon-lime" size={24} />
                                     <p className="text-gray-400 text-sm">Monthly Budget</p>
                                 </div>
                                 <h3 className="text-3xl font-bold text-white">₹{budgetData?.monthlyBudget?.toLocaleString() || 0}</h3>

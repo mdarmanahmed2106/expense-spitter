@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { UserPlus, Users, Mail, Check, X, Trash2, Search, DollarSign } from 'lucide-react';
+import { UserPlus, Users, Mail, Check, X, Trash2, Search, IndianRupee } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import TopNav from '../components/TopNav';
 import { friendshipAPI, friendSplitAPI } from '../services/api';

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PieChart, Pie, Cell, ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
-import { TrendingUp, TrendingDown, DollarSign, Users, Calendar, ArrowRight } from 'lucide-react';
+import { TrendingUp, TrendingDown, IndianRupee, Users, Calendar, ArrowRight } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import TopNav from '../components/TopNav';
 import PageLoader from '../components/PageLoader';
@@ -104,7 +104,7 @@ const Dashboard = () => {
                         <div className="premium-card group cursor-pointer">
                             <div className="flex items-start justify-between mb-4">
                                 <div className="w-12 h-12 rounded-2xl bg-neon-lime/10 flex items-center justify-center group-hover:bg-neon-lime/20 transition-all">
-                                    <DollarSign className="text-neon-lime" size={24} />
+                                    <IndianRupee className="text-neon-lime" size={24} />
                                 </div>
                                 <TrendingUp className="text-neon-lime" size={20} />
                             </div>

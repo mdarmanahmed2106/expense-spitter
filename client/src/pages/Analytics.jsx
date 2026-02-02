@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, BarChart, Bar, LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts';
-import { TrendingUp, DollarSign, Calendar, ArrowUpRight } from 'lucide-react';
+import { TrendingUp, IndianRupee, Calendar, ArrowUpRight } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import TopNav from '../components/TopNav';
 import PageLoader from '../components/PageLoader';
@@ -48,7 +48,7 @@ const Analytics = () => {
                         <div className="premium-card">
                             <div className="flex items-center justify-between mb-4">
                                 <div className="w-12 h-12 rounded-2xl bg-neon-lime/10 flex items-center justify-center">
-                                    <DollarSign className="text-neon-lime" size={24} />
+                                    <IndianRupee className="text-neon-lime" size={24} />
                                 </div>
                                 <ArrowUpRight className="text-neon-lime" size={20} />
                             </div>

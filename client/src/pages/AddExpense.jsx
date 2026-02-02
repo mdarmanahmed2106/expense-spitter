@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { DollarSign, Calendar, Tag, Users, Check, X, User, Camera, Upload, Loader2, RefreshCw } from 'lucide-react';
+import { IndianRupee, Calendar, Tag, Users, Check, X, User, Camera, Upload, Loader2, RefreshCw } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import TopNav from '../components/TopNav';
 import { expenseAPI, groupAPI, friendSplitAPI, friendshipAPI } from '../services/api';
@@ -374,7 +374,7 @@ const AddExpense = () => {
                                     Amount (₹)
                                 </label>
                                 <div className="relative">
-                                    <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
+                                    <IndianRupee className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
                                     <input
                                         type="number"
                                         value={formData.amount}
