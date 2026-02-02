@@ -11,36 +11,38 @@ const getTransactions = async (userId, startDate, endDate) => {
     });
 };
 
-// Get analytics data for user
+// Get analytics data for user - OPTIMIZED
 const getAnalytics = async (req, res) => {
     try {
         const userId = req.user.id;
         const now = new Date();
-        const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-        const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
 
-        // Get this month's transactions
-        const monthlyTransactions = await getTransactions(userId, startOfMonth, endOfMonth);
+        // 1. Determine Date Ranges
+        // Monthly Trend needs last 6 months
+        const sixMonthsAgo = new Date(now.getFullYear(), now.getMonth() - 5, 1);
 
-        // Category breakdown
-        const categoryBreakdownObj = {
-            Food: 0,
-            Travel: 0,
-            Fun: 0,
-            Misc: 0
-        };
+        // 2. Fetch ALL relevant data in ONE query
+        // We fetch everything from 6 months ago till now
+        const allExpenses = await getTransactions(userId, sixMonthsAgo, now);
 
-        monthlyTransactions.forEach(exp => {
+        // 3. Process Data in Memory
+
+        // --- A. Current Month Stats (Category Breakdown & Total) ---
+        const startOfCurrentMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+        const currentMonthExpenses = allExpenses.filter(e => new Date(e.date) >= startOfCurrentMonth);
+
+        const categoryBreakdownObj = { Food: 0, Travel: 0, Fun: 0, Misc: 0 };
+        let totalSpent = 0;
+
+        currentMonthExpenses.forEach(exp => {
             const cat = categoryBreakdownObj[exp.category] !== undefined ? exp.category : 'Misc';
             categoryBreakdownObj[cat] += exp.amount;
+            totalSpent += exp.amount;
         });
 
-        const totalSpent = monthlyTransactions.reduce((sum, exp) => sum + exp.amount, 0);
-
-        // Calculate percentages & Highest spending category
+        // Determine Highest Category
         let highestCategory = 'Misc';
         let highestAmount = 0;
-
         Object.entries(categoryBreakdownObj).forEach(([cat, amount]) => {
             if (amount > highestAmount) {
                 highestAmount = amount;
@@ -48,7 +50,7 @@ const getAnalytics = async (req, res) => {
             }
         });
 
-        // Convert to Array for Frontend (Recharts expects array)
+        // Format Breakdown for Frontend
         const categoryBreakdown = Object.entries(categoryBreakdownObj)
             .map(([category, total]) => ({
                 category,
@@ -57,16 +59,25 @@ const getAnalytics = async (req, res) => {
             }))
             .filter(item => item.total > 0);
 
-        // Weekly spending (last 4 weeks)
+
+        // --- B. Weekly Spending (Last 4 Weeks) ---
         const weeklySpending = [];
         for (let i = 3; i >= 0; i--) {
-            const weekStart = new Date(now);
-            weekStart.setDate(now.getDate() - (i * 7 + 7));
+            // Calculate week boundaries
+            // Week 4 (Oldest) -> Week 1 (Current)
+            // Logic: Week 1 is [now-7days, now], Week 2 is [now-14days, now-7days]...
+            // Note: Use setHours to ensure clean date comparison if needed, but simple comparison works for broad trends
             const weekEnd = new Date(now);
             weekEnd.setDate(now.getDate() - (i * 7));
+            const weekStart = new Date(now);
+            weekStart.setDate(now.getDate() - (i * 7 + 7));
 
-            const weekTransactions = await getTransactions(userId, weekStart, weekEnd);
-            const weekTotal = weekTransactions.reduce((sum, exp) => sum + exp.amount, 0);
+            const weekTotal = allExpenses
+                .filter(e => {
+                    const d = new Date(e.date);
+                    return d > weekStart && d <= weekEnd;
+                })
+                .reduce((sum, exp) => sum + exp.amount, 0);
 
             weeklySpending.push({
                 week: `Week ${4 - i}`,
@@ -74,18 +85,22 @@ const getAnalytics = async (req, res) => {
             });
         }
 
-        // Monthly trend (last 6 months)
+        // --- C. Monthly Trend (Last 6 Months) ---
         const monthlyTrend = [];
         for (let i = 5; i >= 0; i--) {
-            const monthDate = new Date(now.getFullYear(), now.getMonth() - i, 1);
-            const monthStart = new Date(monthDate.getFullYear(), monthDate.getMonth(), 1);
-            const monthEnd = new Date(monthDate.getFullYear(), monthDate.getMonth() + 1, 0);
+            const targetMonthDate = new Date(now.getFullYear(), now.getMonth() - i, 1);
+            const targetMonth = targetMonthDate.getMonth();
+            const targetYear = targetMonthDate.getFullYear();
 
-            const monthTransactions = await getTransactions(userId, monthStart, monthEnd);
-            const monthTotal = monthTransactions.reduce((sum, exp) => sum + exp.amount, 0);
+            const monthTotal = allExpenses
+                .filter(e => {
+                    const d = new Date(e.date);
+                    return d.getMonth() === targetMonth && d.getFullYear() === targetYear;
+                })
+                .reduce((sum, exp) => sum + exp.amount, 0);
 
             monthlyTrend.push({
-                month: monthDate.toLocaleDateString('en-US', { month: 'short' }),
+                month: targetMonthDate.toLocaleDateString('en-US', { month: 'short' }),
                 amount: monthTotal
             });
         }
@@ -93,7 +108,7 @@ const getAnalytics = async (req, res) => {
         res.status(200).json({
             success: true,
             analytics: {
-                categoryBreakdown, // Now an Array
+                categoryBreakdown,
                 weeklySpending,
                 monthlyTrend,
                 highestCategory,
